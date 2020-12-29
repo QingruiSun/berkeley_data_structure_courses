@@ -3,7 +3,7 @@ public class Planet {
     public double xxPos, yyPos, xxVel, yyVel, mass;
     public String imgFileName;
 
-    public static final double GRAVITY_CONSTANT = 6.67e-11;
+    private static final double GRAVITY_CONSTANT = 6.67e-11;
 
     /**
      * Construct an planet from six parameters.
