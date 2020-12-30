@@ -46,7 +46,7 @@ public class Palindrome {
         while (remainNum > 1) {
             char leftChar = deque.removeFirst();
             char rightChar = deque.removeLast();
-            if (cc.equalChars(leftChar, rightChar) == false) {
+            if (!cc.equalChars(leftChar, rightChar)) {
                 return false;
             }
             remainNum = remainNum - 2;

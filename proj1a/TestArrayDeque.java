@@ -8,11 +8,13 @@ public class TestArrayDeque {
     @Test
     public void testAddAndRemove() {
         for (int i = 0; i < 100; ++i) {
-            deque.addFirst(100);
+            deque.addLast(i);
         }
-        deque.printDeque();
-        for (int i = 0; i < 100; ++i) {
-            deque.removeFirst();
+        for (int i = 0; i < 95; ++i) {
+            deque.removeLast();
+        }
+        for(int i = 0; i < 5; ++i) {
+            deque.removeLast();
         }
         assertTrue(deque.isEmpty());
     }

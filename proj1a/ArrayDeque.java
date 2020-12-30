@@ -12,6 +12,8 @@ public class ArrayDeque<T> {
         size = 0;
         usageRatio = 0;
         items = (T[]) new Object[maxLength];
+        firstIndex = 4;
+        lastIndex = 3;
     }
 
     public void addFirst(T item) {
@@ -19,6 +21,7 @@ public class ArrayDeque<T> {
             minusFirstIndex();
         } else {
             expandArray();
+            minusFirstIndex();
         }
         items[firstIndex] = item;
         size++;
@@ -41,6 +44,7 @@ public class ArrayDeque<T> {
             addLastIndex();
         } else {
             expandArray();
+            addLastIndex();
         }
         items[lastIndex] = item;
         size++;
@@ -101,11 +105,11 @@ public class ArrayDeque<T> {
                 System.out.print(items[i]);
             }
         } else {
-            for (int i = firstIndex; i <= maxLength - 1; i++) {
+            for (int i = firstIndex + 1; i <= maxLength - 1; ++i) {
                 System.out.print(' ');
                 System.out.print(items[i]);
             }
-            for (int i = 0; i < lastIndex; ++i) {
+            for (int i = 0; i <= lastIndex; ++i) {
                 System.out.print(' ');
                 System.out.print(items[i]);
             }
