@@ -6,7 +6,7 @@ public class ArrayDeque<T> {
     private int firstIndex;
     private int lastIndex;
     private int size;
-    double usageRatio;
+    private double usageRatio;
     public ArrayDeque() {
         maxLength = 8;
         size = 0;
@@ -15,10 +15,10 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        if(size < maxLength) {
+        if (size < maxLength) {
             minusFirstIndex();
         } else {
-            ExpandArray();
+            expandArray();
         }
         items[firstIndex] = item;
         size++;
@@ -40,7 +40,7 @@ public class ArrayDeque<T> {
         if (size < maxLength) {
             addLastIndex();
         } else {
-            ExpandArray();
+            expandArray();
         }
         items[lastIndex] = item;
         size++;
@@ -57,7 +57,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    private void ExpandArray() {
+    private void expandArray() {
         int prevMaxLength = maxLength;
         maxLength = maxLength * 2;
         T[] newItems = (T[]) new Object[maxLength];
@@ -119,9 +119,9 @@ public class ArrayDeque<T> {
         T result = items[firstIndex];
         addFirstIndexHelper();
         size--;
-        usageRatio = size / maxLength;
+        usageRatio = 1.0 * size / maxLength;
         if ((usageRatio <= 0.25) && (maxLength > 16)) {
-            ContractArray();;
+            contractArray();
         }
         return result;
     }
@@ -129,20 +129,20 @@ public class ArrayDeque<T> {
     /**
      * Contract the array when the usage ratio is too low.
      */
-    private void ContractArray() {
+    private void contractArray() {
         int prevMaxLength = maxLength;
         maxLength = maxLength / 2;
         T[] newItems = (T[]) new Object[maxLength];
         if (firstIndex <= lastIndex) {
-            for(int i = firstIndex; i <= lastIndex; ++i){
+            for (int i = firstIndex; i <= lastIndex; ++i) {
                 newItems[i - firstIndex] = items[i];
             }
         } else {
             int newIndex = 0;
-            for(int i = firstIndex; i <= prevMaxLength - 1; ++i) {
+            for (int i = firstIndex; i <= prevMaxLength - 1; ++i) {
                 newItems[newIndex++] = items[i];
             }
-            for(int i = 0; i <= lastIndex; ++i) {
+            for (int i = 0; i <= lastIndex; ++i) {
                 newItems[newIndex++] = items[i];
             }
         }
@@ -169,9 +169,9 @@ public class ArrayDeque<T> {
         T result = items[lastIndex];
         minusLastIndex();
         size--;
-        usageRatio = size / maxLength;
+        usageRatio = 1.0 * size / maxLength;
         if ((usageRatio <= 0.25) && (maxLength > 16)) {
-            ContractArray();
+            contractArray();
         }
         return result;
     }
@@ -188,7 +188,11 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        return items[index];
+        if ((index < 0) || (index > size - 1)) {
+            return null;
+        }
+        int itemsIndex = (firstIndex + index) % size;
+        return items[itemsIndex];
     }
 
 }

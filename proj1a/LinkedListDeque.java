@@ -5,18 +5,18 @@ public class LinkedListDeque<T> {
     private int size = 0;
 
 
-    public class InnerNode {
+    private class InnerNode {
 
         private InnerNode prev;
         private InnerNode next;
         private T item;
 
-        public InnerNode() {
+        private InnerNode() {
             this.prev = null;
             this.next = null;
         }
 
-        public InnerNode(T item) {
+        private InnerNode(T item) {
             this.prev = null;
             this.next = null;
             this.item = item;
