@@ -1,7 +1,7 @@
 // TODO: Make sure to make this class a part of the synthesizer package
 package synthesizer;
 
-import java.lang.RuntimeException;
+
 import java.util.Iterator;
 
 //TODO: Make sure to make this class and all of its methods public
@@ -67,13 +67,13 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     // TODO: When you get to part 5, implement the needed code to support iteration.
 
     public Iterator<T> iterator() {
-        return new arrayRingBufferIterator();
+        return new ArrayRingBufferIterator();
     }
 
-    private class arrayRingBufferIterator implements Iterator<T> {
+    private class ArrayRingBufferIterator implements Iterator<T> {
         private int index = 0;
 
-        public arrayRingBufferIterator() {
+        ArrayRingBufferIterator() {
             this.index = 0;
         }
 
