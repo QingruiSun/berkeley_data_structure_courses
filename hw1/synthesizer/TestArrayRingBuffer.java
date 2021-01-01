@@ -9,7 +9,30 @@ import static org.junit.Assert.*;
 public class TestArrayRingBuffer {
     @Test
     public void someTest() {
-        //ArrayRingBuffer arb = new ArrayRingBuffer(10);
+        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(10);
+        for (int i = 0; i < 10; ++i) {
+            arb.enqueue(i);
+        }
+        assertTrue(arb.isFull());
+        double eps = 1e-7;
+        for (int i = 0; i < 10; ++i) {
+            int expected = i;
+            int actual = arb.dequeue();
+            assertTrue(expected == actual);
+        }
+        assertTrue(arb.isEmpty());
+    }
+
+
+    @Test
+    public void testIteration() {
+        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(10);
+        for (int i = 0; i < 10; ++i) {
+            arb.enqueue(i);
+        }
+        for (Integer arbItem : arb) {
+            System.out.println(arbItem);
+        }
     }
 
     /** Calls tests for ArrayRingBuffer. */
