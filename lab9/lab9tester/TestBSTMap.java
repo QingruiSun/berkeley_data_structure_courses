@@ -2,8 +2,12 @@ package lab9tester;
 
 import static org.junit.Assert.*;
 
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 import lab9.BSTMap;
+
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Tests by Brendan Hu, Spring 2015, revised for 2018 by Josh Hug
@@ -85,6 +89,31 @@ public class TestBSTMap {
         assertTrue(b.containsKey("hi"));
         assertTrue(b.get("hi") != null);
     }
+
+    @Test
+    public void saintyRemoveTest() {
+        BSTMap<Integer, Integer> b = new BSTMap<>();
+        b.put(1, 3);
+        b.put(2, 3);
+        b.put(3, 5);
+        assertTrue(b.size() == 3);
+        b.remove(1);
+        System.out.println(b.size());
+        assertTrue(b.size() == 2);
+        assertTrue(b.remove(1) == null);
+    }
+
+    @Test
+    public void saintyIteratorTest() {
+        BSTMap<Integer, Integer> b = new BSTMap<>();
+        b.put(1, 2);
+        b.put(2, 2);
+        Iterator<Integer> it = b.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);
