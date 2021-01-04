@@ -31,7 +31,6 @@ public class Word implements WorldState {
         if (words == null) {
             readWords();
         }
-
         if (!words.contains(w)) {
             throw new IllegalArgumentException("Invalid word: " + w);
         }
