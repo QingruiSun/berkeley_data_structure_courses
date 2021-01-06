@@ -13,6 +13,7 @@ public class TestArrayDeque {
         for (int i = 0; i < 95; ++i) {
             deque.removeLast();
         }
+        assertTrue(deque.get(3) == 3);
         for(int i = 0; i < 5; ++i) {
             deque.removeLast();
         }
