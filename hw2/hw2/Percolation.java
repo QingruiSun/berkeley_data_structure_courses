@@ -16,7 +16,7 @@ public class Percolation {
     public Percolation(int N) {
         this.N = N;
         openMatrix = new boolean[N][N];
-        uf = new WeightedQuickUnionUF(N * N);
+        uf = new WeightedQuickUnionUF(N * N + 1);
         hasUpSite = false;
         openSiteNum = 0;
         isPercolated = false;
@@ -31,12 +31,6 @@ public class Percolation {
         }
         openSiteNum++;
         openMatrix[row][col] = true;
-        if (row == 0) {
-            if (!hasUpSite) {
-                hasUpSite = true;
-                upSiteCol = col;
-            }
-        }
         for (int i = 0; i < 4; ++i) {
             int nextRow = row + next[i][0];
             int nextCol = col + next[i][1];
@@ -47,12 +41,7 @@ public class Percolation {
             }
         }
         if (row == 0) {
-            uf.union(col, upSiteCol);
-        }
-        if (row == N - 1) {
-            if (uf.connected(row * N + col, upSiteCol)) {
-                isPercolated = true;
-            }
+            uf.union(col, N * N);
         }
     }
 
@@ -67,7 +56,7 @@ public class Percolation {
         if ((row < 0) || (row >= N) || (col < 0) || (col >= N)) {
             throw new IllegalArgumentException("Illegal argument in isFull function");
         }
-        return uf.connected(row * N + col, upSiteCol);
+        return uf.connected(row * N + col, N * N);
     }
 
     public int numberOfOpenSites() {
@@ -75,13 +64,18 @@ public class Percolation {
     }
 
     public boolean percolates() {
+        for (int i = 0; i < N; ++i) {
+            if (uf.connected((N - 1) * N + i, N * N)) {
+                isPercolated = true;
+                break;
+            }
+        }
         return isPercolated;
     }
 
     public static void main(String[] args) {
-        PercolationFactory pf = new PercolationFactory();
-        PercolationStats ps = new PercolationStats(30, 100, pf);
-        System.out.println(ps.mean());
-
+        PercolationFactory percolationFactory  = new PercolationFactory();
+        PercolationStats percolationStats = new PercolationStats(40, 40, percolationFactory);
+        System.out.println(percolationStats.mean());
     }
 }
