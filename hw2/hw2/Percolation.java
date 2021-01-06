@@ -4,27 +4,27 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
-    boolean[][] openMatrix;
-    WeightedQuickUnionUF uf;
-    boolean hasUpSite;
-    int upSiteCol;
-    int[][] next = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
-    int N;
-    int openSiteNum;
-    boolean isPercolated;
+    private boolean[][] openMatrix;
+    private WeightedQuickUnionUF uf;
+    private int[][] next = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
+    private int N;
+    private int openSiteNum;
+    private boolean isPercolated;
 
     public Percolation(int N) {
+        if (N <= 0) {
+            throw new IllegalArgumentException("N <= 0.");
+        }
         this.N = N;
         openMatrix = new boolean[N][N];
         uf = new WeightedQuickUnionUF(N * N + 1);
-        hasUpSite = false;
         openSiteNum = 0;
         isPercolated = false;
     }
 
     public void open(int row, int col) {
         if ((row < 0) || (row >= N) || (col < 0) || (col >= N)) {
-            throw new IllegalArgumentException("Illegal argument in open function");
+            throw new IndexOutOfBoundsException("row = " + row + " col = " + col);
         }
         if (openMatrix[row][col]) {
             return;
@@ -47,14 +47,14 @@ public class Percolation {
 
     public boolean isOpen(int row, int col) {
         if ((row < 0) || (row >= N) || (col < 0) || (col >= N)) {
-            throw new IllegalArgumentException("Illegal argument in isOpen function");
+            throw new IndexOutOfBoundsException("row = " + row + " col = " + col);
         }
         return openMatrix[row][col];
     }
 
     public boolean isFull(int row, int col) {
         if ((row < 0) || (row >= N) || (col < 0) || (col >= N)) {
-            throw new IllegalArgumentException("Illegal argument in isFull function");
+            throw new IndexOutOfBoundsException("row = " + row + " col = " + col);
         }
         return uf.connected(row * N + col, N * N);
     }
@@ -63,6 +63,7 @@ public class Percolation {
         return openSiteNum;
     }
 
+    /* The complexity in this is O(N). */
     public boolean percolates() {
         for (int i = 0; i < N; ++i) {
             if (uf.connected((N - 1) * N + i, N * N)) {

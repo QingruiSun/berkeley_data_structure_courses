@@ -14,6 +14,12 @@ public class PercolationStats {
 
     /* Perform T independent experiments on an N-by-N grid */
     public PercolationStats(int N, int T, PercolationFactory pf) {
+        if (N <= 0) {
+            throw new IllegalArgumentException("N <= 0");
+        }
+        if (T <= 0) {
+            throw new IllegalArgumentException("T <= 0");
+        }
         this.N = N;
         this.T = T;
         simulationResult = new double[T];
