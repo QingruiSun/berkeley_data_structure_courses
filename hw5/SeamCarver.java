@@ -68,7 +68,8 @@ public class SeamCarver {
         nextRow = 0;
         for (int j = 0; j < width; ++j) {
             for (int k = 0; k < 3; ++k) {
-                rowEnergyArray[height - 1][j][k] = pixelArray[nextRow][j][k] - pixelArray[preRow][j][k];
+                rowEnergyArray[height - 1][j][k] = pixelArray[nextRow][j][k]
+                        - pixelArray[preRow][j][k];
             }
         }
         for (int i = 1; i < width - 1; ++i) {
@@ -90,7 +91,8 @@ public class SeamCarver {
         preCol = (width - 2) % width;
         for (int j = 0; j < height; ++j) {
             for (int k = 0; k < 3; ++k) {
-                colEnergyArray[j][width - 1][k] = pixelArray[j][nextCol][k] - pixelArray[j][preCol][k];
+                colEnergyArray[j][width - 1][k] = pixelArray[j][nextCol][k]
+                        - pixelArray[j][preCol][k];
             }
         }
         for (int i = 0; i < height; ++i) {
