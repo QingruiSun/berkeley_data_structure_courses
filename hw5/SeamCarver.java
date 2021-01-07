@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.Picture;
 
+import java.awt.Color;
+
 public class SeamCarver {
 
     private Picture picture;
@@ -18,13 +20,16 @@ public class SeamCarver {
     }
 
     private void buildPixelArray() {
+        if (picture == null) {
+            return;
+        }
         pixelArray = new double[height][width][3];
         for (int i = 0; i < width; ++i) {
             for (int j = 0; j < height; ++j) {
-                int pointColor = picture.getRGB(i, j);
-                int r = (pointColor >> 16) & 0xFF;
-                int g = (pointColor >> 8) & 0xFF;
-                int b = (pointColor >> 0) & 0xFF;
+                Color c = picture.get(i, j);
+                int r = c.getRed();
+                int g = c.getGreen();
+                int b = c.getBlue();
                 pixelArray[j][i][0] = r;
                 pixelArray[j][i][1] = g;
                 pixelArray[j][i][2] = b;
@@ -98,7 +103,8 @@ public class SeamCarver {
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
                 for (int k = 0; k < 3; ++k) {
-                    energyArray[i][j] = energyArray[i][j] + colEnergyArray[i][j][k] * colEnergyArray[i][j][k]
+                    energyArray[i][j] = energyArray[i][j] + colEnergyArray[i][j][k]
+                            * colEnergyArray[i][j][k]
                             + rowEnergyArray[i][j][k] * rowEnergyArray[i][j][k];
                 }
             }
