@@ -26,6 +26,7 @@ public class SeamCarver {
         pixelArray = new double[height][width][3];
         for (int i = 0; i < width; ++i) {
             for (int j = 0; j < height; ++j) {
+                /* Use this way to get RGB, forbidden use function getRGB() */
                 Color c = picture.get(i, j);
                 int r = c.getRed();
                 int g = c.getGreen();
@@ -38,7 +39,8 @@ public class SeamCarver {
     }
 
     public Picture picture() {
-        return picture;
+        /* Use copy constructor.  Defensive copy is important! */
+        return new Picture(picture);
     }
 
     public int width() {
