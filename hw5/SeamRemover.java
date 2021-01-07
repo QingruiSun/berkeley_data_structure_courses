@@ -15,6 +15,7 @@ public class SeamRemover {
         } else if(var0.width() == 1) {
             throw new IllegalArgumentException("Image width is 1.");
         } else if(var1.length != var0.width()) {
+            System.out.println(var1.length + " " + var0.width());
             throw new IllegalArgumentException("Seam length does not match image width.");
         } else {
             for(int var2 = 0; var2 < var1.length - 2; ++var2) {
@@ -35,7 +36,6 @@ public class SeamRemover {
                     var5.set(var3, var4 - 1, var0.get(var3, var4));
                 }
             }
-
             return var5;
         }
     }

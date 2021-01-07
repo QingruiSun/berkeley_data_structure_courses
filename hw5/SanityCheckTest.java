@@ -25,6 +25,7 @@ public class SanityCheckTest {
         }
 
         SeamCarver sc = new SeamCarver(p);
+        System.out.println(sc.width());
         double[][] energy = new double[3][4];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
@@ -38,7 +39,6 @@ public class SanityCheckTest {
     public void sanityVerticalSeamTest() {
         Picture p = new Picture("images/6x5.png");
         SeamCarver sc = new SeamCarver(p);
-
         int[] seam = sc.findVerticalSeam();
         int[] expected = {3, 4, 3, 2, 2};
         assertArrayEquals(expected, seam);
@@ -48,8 +48,14 @@ public class SanityCheckTest {
     public void sanityHorizontalSeamTest() {
         Picture p = new Picture("images/6x5.png");
         SeamCarver sc = new SeamCarver(p);
-
         int[] seam = sc.findHorizontalSeam();
+        /*
+        for (int i = 0; i < sc.height(); ++i) {
+            for (int j = 0; j < sc.width(); ++j) {
+                System.out.print(sc.energy(j, i) + " ");
+            }
+            System.out.println();
+        } */
         int[] expected = {2, 2, 1, 2, 1, 2};
         assertArrayEquals(expected, seam);
     }
