@@ -53,10 +53,7 @@ public class HuffmanEncoder {
         for (int i = 0; i < inputSymbols.length; ++i) {
             bitSequenceList.add(lookuptab.get(inputSymbols[i]));
         }
-        BitSequence bitSequence = null;
-        for (int i = 0; i < bitSequenceList.size(); ++i) {
-            bitSequence = BitSequence.assemble(bitSequenceList);
-        }
+        BitSequence bitSequence = BitSequence.assemble(bitSequenceList);
         ow.writeObject(bitSequence);
     }
 
